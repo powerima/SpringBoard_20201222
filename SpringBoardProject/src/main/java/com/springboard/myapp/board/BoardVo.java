@@ -8,9 +8,11 @@ public class BoardVo {
 	private String passwd;
 	private String regdate;
 	private String ip;
-	private int cnt;
+	private int readcnt;
 	private int ref;
 	private int re_step;
+	private String searchCondition;
+	private String searchKeyword;
 	public int getSeq() {
 		return seq;
 	}
@@ -53,11 +55,11 @@ public class BoardVo {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	public int getCnt() {
-		return cnt;
+	public int getReadcnt() {
+		return readcnt;
 	}
-	public void setCnt(int cnt) {
-		this.cnt = cnt;
+	public void setReadcnt(int readcnt) {
+		this.readcnt = readcnt;
 	}
 	public int getRef() {
 		return ref;
@@ -71,10 +73,22 @@ public class BoardVo {
 	public void setRe_step(int re_step) {
 		this.re_step = re_step;
 	}
+	public String getSearchCondition() {
+		return searchCondition;
+	}
+	public void setSearchCondition(String searchCondition) {
+		this.searchCondition = searchCondition;
+	}
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
 	@Override
 	public String toString() {
 		return "BoardVo [seq=" + seq + ", writer=" + writer + ", content=" + content + ", subjet=" + subjet
-				+ ", passwd=" + passwd + ", regdate=" + regdate + ", ip=" + ip + ", cnt=" + cnt + ", ref=" + ref
+				+ ", passwd=" + passwd + ", regdate=" + regdate + ", ip=" + ip + ", readcnt=" + readcnt + ", ref=" + ref
 				+ ", re_step=" + re_step + "]";
 	}
 	
