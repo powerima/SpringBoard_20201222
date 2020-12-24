@@ -11,15 +11,15 @@
 	<table border="1">
 	<tr>
 		<td>제목</td>
-		<td><input type="text" name="subject"></td>
+		<td>${board.subject }</td>
 	</tr>
 	<tr>
 		<td>작성자</td>
-		<td><input type="text" name="writer"></td>
+		<td>${board.writer }</td>
 	</tr>
 	<tr>
 		<td>내용</td>
-		<td><textarea cols="40" rows="10" name="content"></textarea></td>
+		<td>${board.content }</td>
 	</tr>
 	<tr>
 		<td colspan="2" align="right">

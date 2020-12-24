@@ -1,11 +1,11 @@
 	
-create board_tbl_01(
+create table board_tbl_01(
 	seq number not null,
 	writer nvarchar2(20),
 	content long,
 	subject nvarchar2(50),
 	passwd varchar2(20),
-	regdate date,
+	regdate date default sysdate,
 	ip varchar2(20),
 	readcnt number,
 	ref number(6),
@@ -13,15 +13,14 @@ create board_tbl_01(
 );
 
 
-
 -- article
-insert into board_tbl_01(seq, writer, content, subject, passwd, regdate, ip, readcnt, ref, re_step)
-values((select nvc(max(seq), 0)+1 from board_tbl_02), ?, ?, ?, ?, ?, ?, ?, (select nvc(max(ref), 0) + 1 from board_tbl_1), 0);
+insert into board_tbl_01(seq, regdate, writer, content, subject, passwd, ip, readcnt, ref, re_step)
+values((select nvl(max(seq), 0)+1 from board_tbl_02), sysdate, ?, ?, ?, ?, ?, ?, (select nvc(max(ref), 0) + 1 from board_tbl_1), 0);
 
 
 -- comment
 insert into board_tbl_01(seq, writer, content, subject, passwd, regdate, ip, readcnt, ref, re_step)
-values((select nvc(max(seq), 0)+1 from board_tbl_02), ?, ?, ?, ?, ?, ?, ?, ?, (select nvc(max(re_step), 0)+1) from board_tbl_1 where ref = ?);
+values((select nvl(max(seq), 0)+1 from board_tbl_02), ?, ?, ?, ?, ?, ?, ?, ?, (select nvc(max(re_step), 0)+1) from board_tbl_1 where ref = ?);
 
 
 

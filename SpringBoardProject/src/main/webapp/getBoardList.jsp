@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+  
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +12,14 @@
 <body>
 <div align="center">
 <div>
-<table border="1">
+<table border="1" width="600">
+	<tr>
+		<td align="right">
+			<input type="button" value="글 등록" 
+				onclick="location.href='insertBoard.jsp'"></td>
+	</tr>
+</table>
+<table border="1" width="600">
 	<tr>
 		<td>번호</td>
 		<td>제목</td>
@@ -17,6 +27,15 @@
 		<td>작성일</td>
 		<td>조회수</td>				
 	</tr>
+<c:forEach items="${boardList }" var="board">
+	<tr>
+		<td>${board.seq }</td>
+		<td>${board.subject }</td>
+		<td>${board.writer }</td>
+		<td>${board.regdate }</td>
+		<td>${board.readcnt }</td>
+	</tr>
+</c:forEach>
 </table>
 </div>
 <div>

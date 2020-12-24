@@ -11,6 +11,8 @@ public class BoardVo {
 	private int readcnt;
 	private int ref;
 	private int re_step;
+	private int startRow;
+	private int endRow;
 	private String searchCondition;
 	private String searchKeyword;
 	public int getSeq() {
@@ -72,6 +74,18 @@ public class BoardVo {
 	}
 	public void setRe_step(int re_step) {
 		this.re_step = re_step;
+	}
+	public int getStartRow() {
+		return startRow;
+	}
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+	public int getEndRow() {
+		return endRow;
+	}
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
 	}
 	public String getSearchCondition() {
 		return searchCondition;
