@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BoardDao">
+
+
+	<insert id="insertArticle">
+	<![CDATA[
+		INSERT INTO BOARD_TBL_01(SEQ, WRITER,
+			CONTENT, SUBJECT, PASSWD, REGDATE, 
+			IP, READCNT, REF, RE_STEP)
+		VALUES(
+			(SELECT NVL(MAX(SEQ), 0)+1 FROM BOARD_TBL_01),
+			#{writer}, #{content}, #{subject}, #{passwd},
+			SYSDATE, #{ip}, 0, 
+			(SELECT NVL(MAX(REF),0)+1 FROM BOARD_TBL_01),0)			
+	]]>
+	</insert>
+	
+	<select id="getArticleList" resultType="board">
+	<![CDATA[
+		SELECT ROWNUM, P.* FROM
+			(SELECT ROWNUM AS RNUM, K.* FROM
+				(SELECT * FROM BOARD_TBL_01 
+				WHERE RE_STEP = 0 
+	]]>
+			<if test="searchCondition == 'subject'">
+				AND SUBJECT LIKE '%'||#{searchKeyword}||'%'
+			</if>
+			<if test="searchCondition == 'writer'">
+				AND WRITER LIKE '%'||#{searchKeyword}||'%'
+			</if>
+	<![CDATA[
+				ORDER BY REF DESC) K
+			WHERE ROWNUM <= #{endRow} )P
+		WHERE RNUM >= #{startRow};
+	]]>
+	</select>
+
+</mapper>
