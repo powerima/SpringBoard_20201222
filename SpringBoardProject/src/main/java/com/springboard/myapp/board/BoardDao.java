@@ -3,7 +3,7 @@ package com.springboard.myapp.board;
 import java.util.List;
 
 public interface BoardDao {
-	public int getRecordCnt();	// 전체 레코드 수 조회
+	public int getRecordCnt(BoardVo vo);	// 전체 레코드 수 조회
 	public void insertCommnet(BoardVo vo);	// 댓글 등록
 	public void insertArticle(BoardVo vo);	// 글 등록
 	public void updateReadcnt(BoardVo vo);	// 조회수 갱신

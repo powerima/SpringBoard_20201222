@@ -1,7 +1,5 @@
 package com.springboard.view.board;
 
-import java.sql.Date;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +47,7 @@ public class BoardController {
 		bs.updateReadcnt(vo);
 		model.addAttribute("board", bs.getArticle(vo));
 		if(vo.getState().equals("getBoard")) {
-			next = "getBoard.jsp";	
+			next = "getBoardTest.jsp";	
 		} else if(vo.getState().equals("updateBoard")) {
 			next = "updateBoard.jsp";
 		}
@@ -66,7 +64,7 @@ public class BoardController {
 		int pageSize = 10;
 		int startRow = ( currentPage - 1 ) * pageSize + 1;
 		int endRow = currentPage * pageSize;
-		int count = bs.getRecordCnt();
+		int count = bs.getRecordCnt(vo);
 		
 		if(count > 0) {
 			int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
@@ -90,9 +88,11 @@ public class BoardController {
 			model.addAttribute("pageBlock", pageBlock);
 			model.addAttribute("pageCount", pageCount);
 			model.addAttribute("pageNum", currentPage);
-			model.addAttribute("recordCnt", bs.getRecordCnt());
-			model.addAttribute("boardList", bs.getArticleList(vo));
+			model.addAttribute("searchCondition", vo.getSearchCondition());
+			model.addAttribute("searchKeyword", vo.getSearchKeyword());
 			
+			model.addAttribute("recordCnt", bs.getRecordCnt(vo));
+			model.addAttribute("boardList", bs.getArticleList(vo));
 		}
 
 		return "getBoardList.jsp";

@@ -13,13 +13,9 @@
 <body>
 <div align="center">
 <div>
-<table border="1" width="600">
-	<tr>
-		<td align="right">
-			<input type="button" value="글 등록" 
-				onclick="location.href='insertBoard.jsp'"></td>
-	</tr>
-</table>
+	<br><hr>
+</div>
+<div>
 <table border="1" width="600">
 	<tr>
 		<td>번호</td>
@@ -40,28 +36,41 @@
 </c:forEach>
 </table>
 </div>
-
+<div>
+	<table width="600">
+		<tr>
+			<td align="right">
+				<input type="button" value="글 등록" 
+					onclick="location.href='insertBoard.jsp'">
+				<input type="button" value="전체 목록" 
+					onclick="location.href='getArticleList.do'"></td></tr>
+	</table>
+	<br><br>
+</div>
 <div class="page">
 	<c:if test="${recordCnt > 0 }">
 		<c:if test="${startPage > pageBlock }" >
-			<a href="getArticleList.do?pageNum=${startPage - pageBlock}">[이전]</a>
+			<a href="getArticleList.do?pageNum=${startPage - pageBlock}
+				&searchCondition=${searchCondition }&searchKeyword=${searchKeyword }">[이전]</a>
 		</c:if>
 		<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
 			<c:if test="${pageNum == i }">
 				${i }
 			</c:if>
 			<c:if test="${pageNum != i }">
-				[<a href="getArticleList.do?pageNum=${i }">${i }</a>]
+				[<a href="getArticleList.do?pageNum=${i }
+					&searchCondition=${searchCondition }&searchKeyword=${searchKeyword }">${i }</a>]
 			</c:if>
 		</c:forEach>
 		<c:if test="${endPage < pageCount }">
-			<a href="getArticleList.do?pageNum=${startPage + pageBlock}">[다음 10개]</a>
+			<a href="getArticleList.do?pageNum=${startPage + pageBlock}
+				&searchCondition=${searchCondition }&searchKeyword=${searchKeyword }">[다음 10개]</a>
 		</c:if>
 	</c:if>
 </div>
 
 <div>
-<form action="getBoardList.do">
+<form action="getArticleList.do">
 <select name="searchCondition">
 	<option value="subject">제목</option>
 	<option value="writer">작성자</option>

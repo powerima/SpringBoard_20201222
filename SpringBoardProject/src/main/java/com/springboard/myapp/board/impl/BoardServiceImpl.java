@@ -77,8 +77,8 @@ public class BoardServiceImpl implements BoardService {
 
 	// 전체 레코드 수 조회
 	@Override
-	public int getRecordCnt() {
+	public int getRecordCnt(BoardVo vo) {
 		// TODO Auto-generated method stub
-		return boardDao.getRecordCnt();
+		return boardDao.getRecordCnt(vo);
 	}
 }

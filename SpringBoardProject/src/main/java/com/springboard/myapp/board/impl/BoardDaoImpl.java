@@ -76,9 +76,9 @@ public class BoardDaoImpl implements BoardDao {
 
 	// 전체 레코드 수 조회
 	@Override
-	public int getRecordCnt() {
+	public int getRecordCnt(BoardVo vo) {
 		// TODO Auto-generated method stub
-		return mybatis.selectOne("BoardDao.getRecordCnt");
+		return mybatis.selectOne("BoardDao.getRecordCnt", vo);
 	}
 
 }

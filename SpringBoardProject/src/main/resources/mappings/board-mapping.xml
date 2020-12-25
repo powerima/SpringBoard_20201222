@@ -75,6 +75,12 @@
 		SELECT COUNT(*) FROM BOARD_TBL_01
 		WHERE RE_STEP = 0
 	]]>
+		<if test="searchCondition == 'subject'">
+			AND SUBJECT LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition == 'writer'">
+			AND WRITER LIKE '%'||#{searchKeyword}||'%'
+		</if>
 	</select>
 	
 </mapper>

@@ -11,7 +11,7 @@
 <form action="updateArticle.do" method="post">
 <table border="1" width="500">
 	<tr>
-		<td>제목</td>
+		<td width="70">제목</td>
 		<td><input type="text" 
 			value="${board.subject }" name="subject"></td>
 	</tr>

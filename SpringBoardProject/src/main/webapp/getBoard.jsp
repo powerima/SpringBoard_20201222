@@ -12,7 +12,7 @@
 <div>
 <table border="1" width="450">
 	<tr>
-		<td>제목</td>
+		<td width="70">제목</td>
 		<td>${board.subject }</td>
 	</tr>
 	<tr>
