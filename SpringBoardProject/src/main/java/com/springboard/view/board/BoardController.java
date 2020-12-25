@@ -1,5 +1,7 @@
 package com.springboard.view.board;
 
+import java.sql.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,11 +60,63 @@ public class BoardController {
 	// 글 목록 조회
 	@RequestMapping(value="getArticleList.do")
 	public String getArticleList(BoardVo vo, Model model) {
-		vo.setStartRow(1);
-		vo.setEndRow(10);
-		model.addAttribute("recordCnt", bs.getRecordCnt());
-		model.addAttribute("boardList", bs.getArticleList(vo));
+		// 페이지 나누기
+		if(vo.getPageNum() == 0 ) vo.setPageNum(1);
+		int currentPage = vo.getPageNum();
+		int pageSize = 10;
+		int startRow = ( currentPage - 1 ) * pageSize + 1;
+		int endRow = currentPage * pageSize;
+		int count = bs.getRecordCnt();
+		
+		if(count > 0) {
+			int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+			int startPage = 1;
+			int pageBlock = 10;
+			
+			if (currentPage % pageBlock != 0) { 
+				startPage = (int)(currentPage/pageBlock) * pageBlock + 1;			
+			} else { 
+				startPage = (int)(currentPage/pageBlock-1) * pageBlock + 1;
+			}
+			int endPage = startPage + pageBlock - 1;
+			
+			if(endPage > pageCount) endPage = pageCount;
+			
+			vo.setStartRow(startRow);
+			vo.setEndRow(endRow);
+			
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("pageBlock", pageBlock);
+			model.addAttribute("pageCount", pageCount);
+			model.addAttribute("pageNum", currentPage);
+			model.addAttribute("recordCnt", bs.getRecordCnt());
+			model.addAttribute("boardList", bs.getArticleList(vo));
+			
+		}
+
 		return "getBoardList.jsp";
+	}
+	
+	// testBoard insert big data
+	@RequestMapping(value="testInsertBoard.do")
+	public void testInsertBoard(HttpServletRequest request) {
+		BoardVo vo = new BoardVo(); 
+		String content = "test";
+		
+		for(int i = 1; i < 100; i++) {
+			content = content + i + " ";
+		}
+		
+		
+		for(int i = 1; i < 255; i++) {
+			vo.setWriter("test" + i);
+			vo.setContent(content);
+			vo.setSubject("board Test" + i);
+			vo.setPasswd("1234");
+			vo.setIp(request.getRemoteAddr());
+			bs.insertArticle(vo);
+		}
 	}
 		
 }

@@ -11,11 +11,13 @@ public class BoardVo {
 	private int readcnt;
 	private int ref;
 	private int re_step;
+	private int pageNum;
 	private int startRow;
 	private int endRow;
 	private String searchCondition;
 	private String searchKeyword;
 	private String state;
+	
 	public int getSeq() {
 		return seq;
 	}
@@ -75,6 +77,12 @@ public class BoardVo {
 	}
 	public void setRe_step(int re_step) {
 		this.re_step = re_step;
+	}
+	public int getPageNum() {
+		return pageNum;
+	}
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
 	}
 	public int getStartRow() {
 		return startRow;
