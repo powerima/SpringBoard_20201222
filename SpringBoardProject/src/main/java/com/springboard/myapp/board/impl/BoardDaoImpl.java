@@ -21,29 +21,31 @@ public class BoardDaoImpl implements BoardDao {
 		mybatis.insert("BoardDao.insertComment", vo);
 	}
 
-	// 글 등록
+	// 게시 글 등록
 	@Override
 	public void insertArticle(BoardVo vo) {
 		// TODO Auto-generated method stub
 		mybatis.insert("BoardDao.insertArticle", vo);
 	}
+
+	// 게시 글 수정
+	@Override
+	public void updateArticle(BoardVo vo) {
+		// TODO Auto-generated method stub
+		mybatis.update("BoardDao.updateArticle", vo);
+	}
 	
+	// 조회수 갱신
 	@Override
-	public void insertBoard(BoardVo vo) {
+	public void updateReadcnt(BoardVo vo) {
 		// TODO Auto-generated method stub
-		
+		mybatis.update("BoardDao.updateReadcnt", vo);
 	}
-
-	@Override
-	public void updateBoard(BoardVo vo) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public void deleteBoard(BoardVo vo) {
 		// TODO Auto-generated method stub
-		
+		mybatis.delete("BoardDao.deleteBoard", vo);
 	}
 
 	@Override
@@ -52,11 +54,31 @@ public class BoardDaoImpl implements BoardDao {
 		return null;
 	}
 
+	// 게시 글 상세 조회
+	@Override
+	public BoardVo getArticle(BoardVo vo) {
+		// TODO Auto-generated method stub
+		return mybatis.selectOne("BoardDao.getArticle", vo);
+	}
+
 	@Override
 	public List<BoardVo> getBoardList(BoardVo vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	// 글 목록 조회
+	@Override
+	public List<BoardVo> getArticleList(BoardVo vo) {
+		// TODO Auto-generated method stub
+		return mybatis.selectList("BoardDao.getArticleList", vo);
+	}
+
+	// 전체 레코드 수 조회
+	@Override
+	public int getRecordCnt() {
+		// TODO Auto-generated method stub
+		return mybatis.selectOne("BoardDao.getRecordCnt");
+	}
 
 }

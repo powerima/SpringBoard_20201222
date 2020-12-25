@@ -8,24 +8,34 @@
 </head>
 <body>
 <div align="center">
-<table border="1">
+<form action="updateArticle.do" method="post">
+<table border="1" width="500">
 	<tr>
 		<td>제목</td>
-		<td><input type="text" name="subject"></td>
+		<td><input type="text" 
+			value="${board.subject }" name="subject"></td>
 	</tr>
 	<tr>
 		<td>작성자</td>
-		<td><input type="text" name="writer"></td>
+		<td><input type="text"
+			value="${board.writer }"  name="writer"></td>
+	</tr>
+	<tr>
+		<td>비밀번호</td>
+		<td><input type="password" name="passwd"></td>
 	</tr>
 	<tr>
 		<td>내용</td>
-		<td><textarea cols="40" rows="10" name="content"></textarea></td>
+		<td><textarea cols="45" rows="10"
+			 name="content">${board.content }</textarea></td>
 	</tr>
 	<tr>
 		<td colspan="2" align="center">
-			<input type="submit" value="글등록"></td>
+			<input type="submit" onclick="location.href='updateArticle.do'" value="글수정">
+			<input type="submit" onclick="location.href='getArticleList.do'" value="목록"></td>
 	</tr>
 </table>
+</form>
 </div>
 </body>
 </html>

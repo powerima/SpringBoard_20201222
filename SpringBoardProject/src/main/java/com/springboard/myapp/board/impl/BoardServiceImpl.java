@@ -27,19 +27,22 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		boardDao.insertArticle(vo);
 	}
+
+	// 
+	@Override
+	public void updateArticle(BoardVo vo) {
+		// TODO Auto-generated method stub
+		boardDao.updateArticle(vo);
+	}
 	
+	// 조회수 갱신
 	@Override
-	public void insertBoard(BoardVo vo) {
+	public void updateReadcnt(BoardVo vo) {
 		// TODO Auto-generated method stub
-		boardDao.insertBoard(vo);
+		boardDao.updateReadcnt(vo);
 	}
-
-	@Override
-	public void updateBoard(BoardVo vo) {
-		// TODO Auto-generated method stub
-		boardDao.updateBoard(vo);
-	}
-
+	
+	// 글 삭제
 	@Override
 	public void deleteBoard(BoardVo vo) {
 		// TODO Auto-generated method stub
@@ -52,10 +55,30 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.getBoard(vo);
 	}
 
+	// 게시 글 상세 조회
+	@Override
+	public BoardVo getArticle(BoardVo Vo) {
+		// TODO Auto-generated method stub
+		return boardDao.getArticle(Vo);
+	}
+	
 	@Override
 	public List<BoardVo> getBoardList(BoardVo vo) {
 		// TODO Auto-generated method stub
 		return boardDao.getBoardList(vo);
 	}
 
+	// 글 목록 조회
+	@Override
+	public List<BoardVo> getArticleList(BoardVo vo) {
+		// TODO Auto-generated method stub
+		return boardDao.getArticleList(vo);
+	}
+
+	// 전체 레코드 수 조회
+	@Override
+	public int getRecordCnt() {
+		// TODO Auto-generated method stub
+		return boardDao.getRecordCnt();
+	}
 }

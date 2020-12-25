@@ -16,6 +16,40 @@
 	]]>
 	</insert>
 	
+	<delete id="deleteBoard">
+	<![CDATA[
+		DELETE FROM BOARD_TBL_01
+		WHERE SEQ = #{seq}
+	]]>
+	</delete>
+	
+	<update id="updateArticle">
+	<![CDATA[
+		UPDATE BOARD_TBL_01 SET
+			WRITER = #{writer},
+			SUBJECT = #{subject},
+			CONTENT = #{content},
+			PASSWD = #{passwd}
+		WHERE SEQ = #{seq}
+	]]>
+	</update>
+	
+	<update id="updateReadcnt">
+	<![CDATA[
+		UPDATE BOARD_TBL_01 SET
+			READCNT = READCNT+1
+		WHERE SEQ = #{seq}
+	]]>
+	</update>
+	
+	<select id="getArticle" resultType="board">
+	<![CDATA[
+		SELECT * FROM BOARD_TBL_01
+		WHERE SEQ = #{seq}
+	]]>
+	</select>
+	
+	
 	<select id="getArticleList" resultType="board">
 	<![CDATA[
 		SELECT ROWNUM, P.* FROM
@@ -32,8 +66,15 @@
 	<![CDATA[
 				ORDER BY REF DESC) K
 			WHERE ROWNUM <= #{endRow} )P
-		WHERE RNUM >= #{startRow};
+		WHERE RNUM >= #{startRow}
 	]]>
 	</select>
 
+	<select id="getRecordCnt" resultType="Integer">
+	<![CDATA[
+		SELECT COUNT(*) FROM BOARD_TBL_01
+		WHERE RE_STEP = 0
+	]]>
+	</select>
+	
 </mapper>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
   
     
 <!DOCTYPE html>
@@ -30,14 +31,54 @@
 <c:forEach items="${boardList }" var="board">
 	<tr>
 		<td>${board.seq }</td>
-		<td>${board.subject }</td>
+		<td><a href="getArticle.do?seq=${board.seq}
+					&state=getBoard">${board.subject }</a></td>
 		<td>${board.writer }</td>
-		<td>${board.regdate }</td>
+		<td>${fn:substring(board.regdate, 0, 10) }</td>
 		<td>${board.readcnt }</td>
 	</tr>
 </c:forEach>
 </table>
 </div>
+
+<div class="page">
+	<c:set var="name" value="홍길동" />
+	<c:set var="currentPage" value="${pageNum }" />
+	<c:set var="pageSize" value="10" />
+	<c:set var="startRow" value="${(currentPage - 1) * pageSize +1 }" />
+	<c:set var="endRow" value="${currentPage * pageSize }" />
+	<c:set var="count" value="0" />
+	<c:set var="number" value="0" />
+	
+	
+	<c:if test="${count > 0 }">
+		<c:set var="pageCount" value="${count / pageSize + (count % pageSize == 0 ? 0 : 1) }" />
+		<c:set var="startPage" value="1" />
+		<c:if test="${currentPage % 10 != 0 }" >
+			<c:set var="startPage" value="${(currentPage/pageSize) * pageSize + 1 }" />
+		</c:if>
+		<c:if test="${currentPage % 10 == 0 }" >
+			<c:set var="startPage" value="${(currentPage/pageSize) -1) * pageSize + 1 }" />
+		</c:if>
+		
+		<c:set var="pageBlock" value="10" />
+		<c:set var="endPage" value="${startPage + pageBlock -1 }" />
+		
+		<c:if test="${endPage > pageCount }" >
+			<c:set var="endPage" value="pageCount" />
+		</c:if>
+		<c:if test="${startPage > pageBlock }" >
+			<a href="list3.jsp?pageNum=${startPage - 10}">[이전]</a>
+		</c:if>
+		<c:forEach var="i" begin="${startPage }" end="${endPage }" step="1">
+			<a href="getArticleList.do?pageNum=${i }">[${i }]</a>
+		</c:forEach>
+		<c:if test="${endPage < pageCount }">
+			<a href="getArticleList.do?pageNum=${startPage + 10}">[다음 10개]</a>
+		</c:if>
+	</c:if>
+</div>
+
 <div>
 <form action="getBoardList.do">
 <select name="searchCondition">

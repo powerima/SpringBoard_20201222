@@ -4,7 +4,7 @@ public class BoardVo {
 	private int seq;
 	private String writer;
 	private String content;
-	private String subjet;
+	private String subject;
 	private String passwd;
 	private String regdate;
 	private String ip;
@@ -15,6 +15,7 @@ public class BoardVo {
 	private int endRow;
 	private String searchCondition;
 	private String searchKeyword;
+	private String state;
 	public int getSeq() {
 		return seq;
 	}
@@ -33,11 +34,11 @@ public class BoardVo {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getSubjet() {
-		return subjet;
+	public String getSubject() {
+		return subject;
 	}
-	public void setSubjet(String subjet) {
-		this.subjet = subjet;
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 	public String getPasswd() {
 		return passwd;
@@ -99,9 +100,15 @@ public class BoardVo {
 	public void setSearchKeyword(String searchKeyword) {
 		this.searchKeyword = searchKeyword;
 	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 	@Override
 	public String toString() {
-		return "BoardVo [seq=" + seq + ", writer=" + writer + ", content=" + content + ", subjet=" + subjet
+		return "BoardVo [seq=" + seq + ", writer=" + writer + ", content=" + content + ", subject=" + subject
 				+ ", passwd=" + passwd + ", regdate=" + regdate + ", ip=" + ip + ", readcnt=" + readcnt + ", ref=" + ref
 				+ ", re_step=" + re_step + "]";
 	}
