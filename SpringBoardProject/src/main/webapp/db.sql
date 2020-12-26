@@ -14,8 +14,8 @@ create table board_tbl_01(
 
 
 -- article
-insert into board_tbl_01(seq, regdate, writer, content, subject, passwd, ip, readcnt, ref, re_step)
-values((select nvl(max(seq), 0)+1 from board_tbl_02), sysdate, ?, ?, ?, ?, ?, ?, (select nvc(max(ref), 0) + 1 from board_tbl_1), 0);
+insert into board_tbl_01(seq, regdate, writer, content, subject, passwd, ip, readcnt, ref, re_step, commentcnt)
+values((select nvl(max(seq), 0)+1 from board_tbl_02), sysdate, ?, ?, ?, ?, ?, ?, (select nvc(max(ref), 0) + 1 from board_tbl_1), 0, 0);
 
 
 -- comment

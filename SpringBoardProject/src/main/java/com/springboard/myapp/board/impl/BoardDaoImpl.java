@@ -14,6 +14,21 @@ public class BoardDaoImpl implements BoardDao {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
+	// 게시글 당 댓글 수 조회 
+	@Override
+	public int getCommentCnt(BoardVo vo) {
+		// TODO Auto-generated method stub
+		return mybatis.selectOne("BoardDao.getCommentCnt", vo);
+	}
+	
+	// 전체 레코드 수 조회
+	@Override
+	public int getRecordCnt(BoardVo vo) {
+		// TODO Auto-generated method stub
+		return mybatis.selectOne("BoardDao.getRecordCnt", vo);
+	}
+
+	
 	// 댓글 등록
 	@Override
 	public void insertCommnet(BoardVo vo) {
@@ -40,6 +55,13 @@ public class BoardDaoImpl implements BoardDao {
 	public void updateReadcnt(BoardVo vo) {
 		// TODO Auto-generated method stub
 		mybatis.update("BoardDao.updateReadcnt", vo);
+	}
+	
+	// 게시 글에 달린 댓글 수 갱신
+	@Override
+	public void updateCommenctcnt(BoardVo vo) {
+		// TODO Auto-generated method stub
+		mybatis.update("BoardDao.updateCommentcnt", vo); 
 	}
 	
 	@Override
@@ -74,11 +96,10 @@ public class BoardDaoImpl implements BoardDao {
 		return mybatis.selectList("BoardDao.getArticleList", vo);
 	}
 
-	// 전체 레코드 수 조회
 	@Override
-	public int getRecordCnt(BoardVo vo) {
+	public List<BoardVo> getCommentList(BoardVo vo) {
 		// TODO Auto-generated method stub
-		return mybatis.selectOne("BoardDao.getRecordCnt", vo);
+		return mybatis.selectList("BoardDao.getCommentList", vo);
 	}
 
 }

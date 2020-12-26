@@ -6,6 +6,33 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script>
+$(document).ready(function(){
+
+	$(".commentList").load("getCommentList.do?ref=${board.ref}");
+	
+	
+	$("#insertComment").click(function(){
+		var query = {
+			writer: $("#writer").val(),
+			content: $("#content").val(),
+			passwd: $("#passwd").val(),
+			ref: $("#ref").val()
+		};
+		
+		$.ajax({
+			type: "GET",
+			url: "/myapp/insertComment.do",
+			data: query,
+			success: function(data) {
+				$(".commentList").load("getCommentList.do");
+				document.location.reload();
+			}
+		});	
+	});
+});
+</script>
 </head>
 <body>
 <div align="center">
@@ -40,71 +67,25 @@
 
 <div class ="commentList">
 
-	<div class="commentContent">
-		<table width="450">
-			<tr><td colspan="3" align="right">
-				12.25 12:02:23<hr></td></tr>
-			<tr><td width="70">123</td>
-				<td>안녕하세요</td>
-				<td width="45">[삭제]</td></tr>				
-			<tr><td colspan="3" align="right"><hr></td></tr>
-		</table><br>
-	</div>
-	
-	<div class="commentContent">
-		<table width="450">
-			<tr><td colspan="3" align="right">
-				12.25 12:02:23<hr></td></tr>
-			<tr><td width="70">123</td>
-				<td>안녕하세요</td>
-				<td width="45">[삭제]</td></tr>				
-			<tr><td colspan="3" align="right"><hr></td></tr>
-		</table><br>
-	</div>
-	
-	<div class="commentContent">
-		<table width="450">
-			<tr><td colspan="3" align="right">
-				12.25 12:02:23<hr></td></tr>
-			<tr><td width="70">123</td>
-				<td>안녕하세요</td>
-				<td width="45">[삭제]</td></tr>				
-			<tr><td colspan="3" align="right"><hr></td></tr>
-		</table><br>
-	</div>
-	
-
-	
-	<c:forEach items="${commentList }" var="comment">
-	<div class="commentContent">
-		<table width="450">
-			<tr><td colspan="3" align="right">
-				${comment.regdate }<hr></td></tr>
-			<tr><td width="70">${comment.writer }</td>
-				<td>${comment.contenet }</td>
-				<td width="45">[삭제]</td></tr>				
-			<tr><td colspan="3" align="right"><hr></td></tr>
-		</table><br>
-	</div>
-	</c:forEach>
 </div>
 
 <div class="insertComment">
 	<table border="1" width="450">
 		<tr>
 			<td width="100">작성자</td>
-			<td><input type="text" name="writer" size="10"></td>
+			<td><input type="text" id="writer" size="10"></td>
 			<td>비밀번호</td>
-			<td><input type="password" name="passwd" size="8"></td>
+			<td><input type="password" id="passwd" size="8">
+				<input type="hidden" id="ref" value="${board.ref }"></td>
 		</tr>
 		<tr>
 			<td>내용</td>
 			<td colspan="3"><textarea cols="45" rows="5" 
-				name="content"></textarea></td>
+				id="content"></textarea></td>
 		</tr>
 		<tr>
 			<td colspan="4" align="right">
-				<input type="button" value="댓글 등록">
+				<input type="button" id="insertComment" value="댓글 등록">
 			</td>
 		</tr>
 	</table>

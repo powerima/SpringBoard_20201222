@@ -13,7 +13,7 @@
 <body>
 <div align="center">
 <div>
-	<br><hr>
+	<br><hr width="600">
 </div>
 <div>
 <table border="1" width="600">
@@ -28,7 +28,11 @@
 	<tr>
 		<td>${board.seq }</td>
 		<td><a href="getArticle.do?seq=${board.seq}
-					&state=getBoard">${board.subject }</a></td>
+					&state=getBoard">${board.subject }</a>
+		<c:if test="${board.commentcnt > 0}">
+			&nbsp;[${board.commentcnt }]
+		</c:if>			
+		</td>
 		<td>${board.writer }</td>
 		<td>${fn:substring(board.regdate, 0, 10) }</td>
 		<td>${board.readcnt }</td>
@@ -45,7 +49,7 @@
 				<input type="button" value="전체 목록" 
 					onclick="location.href='getArticleList.do'"></td></tr>
 	</table>
-	<br><br>
+	<hr width="600">
 </div>
 <div class="page">
 	<c:if test="${recordCnt > 0 }">

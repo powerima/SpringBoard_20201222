@@ -13,7 +13,21 @@ import com.springboard.myapp.board.BoardVo;
 public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardDao boardDao;
+
+	// 게시글 당 댓글 수 조회
+	@Override
+	public int getCommentCnt(BoardVo vo) {
+		// TODO Auto-generated method stub
+		return boardDao.getCommentCnt(vo);
+	}
 	
+	// 전체 레코드 수 조회
+	@Override
+	public int getRecordCnt(BoardVo vo) {
+		// TODO Auto-generated method stub
+		return boardDao.getRecordCnt(vo);
+	}
+
 	// 댓글 등록
 	@Override
 	public void insertCommnet(BoardVo vo) {
@@ -40,6 +54,13 @@ public class BoardServiceImpl implements BoardService {
 	public void updateReadcnt(BoardVo vo) {
 		// TODO Auto-generated method stub
 		boardDao.updateReadcnt(vo);
+	}
+	
+	// 게시 글에 달린 댓글 수 갱신
+	@Override
+	public void updateCommenctcnt(BoardVo vo) {
+		// TODO Auto-generated method stub
+		boardDao.updateCommenctcnt(vo);
 	}
 	
 	// 글 삭제
@@ -75,10 +96,10 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.getArticleList(vo);
 	}
 
-	// 전체 레코드 수 조회
 	@Override
-	public int getRecordCnt(BoardVo vo) {
+	public List<BoardVo> getCommentList(BoardVo vo) {
 		// TODO Auto-generated method stub
-		return boardDao.getRecordCnt(vo);
+		return boardDao.getCommentList(vo);
 	}
+
 }

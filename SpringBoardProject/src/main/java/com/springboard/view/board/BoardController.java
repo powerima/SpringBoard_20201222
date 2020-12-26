@@ -1,6 +1,10 @@
 package com.springboard.view.board;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +22,23 @@ public class BoardController {
 	@Autowired
 	private BoardService bs;
 	
+	// 댓글 등록
+	@RequestMapping(value="insertComment.do")
+	public void insertComment(BoardVo vo, HttpServletRequest request, 
+					HttpServletResponse response, Model model) {
+		vo.setIp(request.getRemoteAddr());
+		bs.insertCommnet(vo);
+		bs.updateCommenctcnt(vo);
+		model.addAttribute("commentList", bs.getCommentList(vo));
+		try {
+			PrintWriter out = response.getWriter();
+			out.println("insertComment");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+		
 	// 글 등록
 	@RequestMapping(value="insertArticle.do")
 	public String insertArticle(BoardVo vo, HttpServletRequest request) {
@@ -46,8 +67,10 @@ public class BoardController {
 		String next = "";
 		bs.updateReadcnt(vo);
 		model.addAttribute("board", bs.getArticle(vo));
-		if(vo.getState().equals("getBoard")) {
+		
+		if(vo.getState().equals("getBoard")) {			
 			next = "getBoardTest.jsp";	
+			
 		} else if(vo.getState().equals("updateBoard")) {
 			next = "updateBoard.jsp";
 		}
@@ -98,6 +121,13 @@ public class BoardController {
 		return "getBoardList.jsp";
 	}
 	
+	// 댓글 목록 조회
+	@RequestMapping(value="getCommentList.do")
+	public String getCommentList(BoardVo vo, Model model) {
+		model.addAttribute("commentList", bs.getCommentList(vo));
+		return "getCommentList.jsp";
+	}
+		
 	// testBoard insert big data
 	@RequestMapping(value="testInsertBoard.do")
 	public void testInsertBoard(HttpServletRequest request) {

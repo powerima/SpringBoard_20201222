@@ -8,12 +8,13 @@ public class BoardVo {
 	private String passwd;
 	private String regdate;
 	private String ip;
-	private int readcnt;
-	private int ref;
+	private int readcnt;	
+	private int ref;	
 	private int re_step;
 	private int pageNum;
 	private int startRow;
 	private int endRow;
+	private int commentcnt;
 	private String searchCondition;
 	private String searchKeyword;
 	private String state;
@@ -114,11 +115,18 @@ public class BoardVo {
 	public void setState(String state) {
 		this.state = state;
 	}
+	public int getCommentcnt() {
+		return commentcnt;
+	}
+	public void setCommentcnt(int commentcnt) {
+		this.commentcnt = commentcnt;
+	}
 	@Override
 	public String toString() {
 		return "BoardVo [seq=" + seq + ", writer=" + writer + ", content=" + content + ", subject=" + subject
 				+ ", passwd=" + passwd + ", regdate=" + regdate + ", ip=" + ip + ", readcnt=" + readcnt + ", ref=" + ref
-				+ ", re_step=" + re_step + "]";
+				+ ", re_step=" + re_step + ", pageNum=" + pageNum + ", commentcnt=" + commentcnt + ", state=" + state
+				+ "]";
 	}
 	
 }
