@@ -69,7 +69,7 @@ public class BoardController {
 		model.addAttribute("board", bs.getArticle(vo));
 		
 		if(vo.getState().equals("getBoard")) {			
-			next = "getBoardTest.jsp";	
+			next = "getBoard.jsp";	
 			
 		} else if(vo.getState().equals("updateBoard")) {
 			next = "updateBoard.jsp";

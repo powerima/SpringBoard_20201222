@@ -5,9 +5,10 @@ create table board_tbl_01(
 	content long,
 	subject nvarchar2(50),
 	passwd varchar2(20),
-	regdate date default sysdate,
-	ip varchar2(20),
+	regdate date default sysdate,	
+	ip varchar2(20),	
 	readcnt number,
+	commentcnt number(6),
 	ref number(6),
 	re_step number(6)	
 );

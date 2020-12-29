@@ -9,6 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
 <div align="center">
@@ -16,7 +17,7 @@
 	<br><hr width="600">
 </div>
 <div>
-<table border="1" width="600">
+<table width="600">
 	<tr>
 		<td>번호</td>
 		<td>제목</td>

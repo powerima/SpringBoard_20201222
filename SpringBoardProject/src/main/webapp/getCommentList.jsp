@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
 <c:forEach items="${commentList }" var="comment">
