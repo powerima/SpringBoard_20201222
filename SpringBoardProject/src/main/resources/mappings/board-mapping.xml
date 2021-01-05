@@ -5,13 +5,13 @@
 
 	<insert id="insertArticle">
 	<![CDATA[
-		INSERT INTO BOARD_TBL_01(SEQ, WRITER,
-			CONTENT, SUBJECT, PASSWD, REGDATE, 
+		INSERT INTO BOARD_TBL_01(SEQ, WRITER, CONTENT, 
+			SUBJECT, PASSWD, REGDATE, FILENAME,
 			IP, READCNT, REF, RE_STEP, COMMENTCNT)
 		VALUES(
 			(SELECT NVL(MAX(SEQ), 0)+1 FROM BOARD_TBL_01),
 			#{writer}, #{content}, #{subject}, #{passwd},
-			SYSDATE, #{ip}, 0, 
+			SYSDATE, #{filename}, #{ip}, 0, 
 			(SELECT NVL(MAX(REF),0)+1 FROM BOARD_TBL_01),0, 0)			
 	]]>
 	</insert>
@@ -39,7 +39,8 @@
 			WRITER = #{writer},
 			SUBJECT = #{subject},
 			CONTENT = #{content},
-			PASSWD = #{passwd}
+			PASSWD = #{passwd},
+			FILENAME = #{filename}
 		WHERE SEQ = #{seq}
 	]]>
 	</update>
@@ -56,17 +57,38 @@
 	<![CDATA[
 		UPDATE BOARD_TBL_01 SET
 			COMMENTCNT = COMMENTCNT + 1
-		WHERE REF = #{ref} AND RE_STEP = #{re_step}
+		WHERE REF = #{ref} AND RE_STEP = 0
 	]]>
 	</update>
 	
+	<update id="discountCommentcnt">
+	<![CDATA[
+		UPDATE BOARD_TBL_01 SET
+			COMMENTCNT = COMMENTCNT - 1
+		WHERE REF = #{ref} AND RE_STEP = 0
+	]]>	
+	</update>
+		
 	<delete id="deleteBoard">
+	<![CDATA[
+		DELETE FROM BOARD_TBL_01
+		WHERE REF = #{ref}
+	]]>
+	</delete>
+	
+	<delete id="deleteComment">
 	<![CDATA[
 		DELETE FROM BOARD_TBL_01
 		WHERE SEQ = #{seq}
 	]]>
 	</delete>
-		
+	
+	<select id="getSeq" resultType="Integer">
+	<![CDATA[
+		SELECT SEQ FROM BOARD_TBL_01
+		WHERE REF = #{ref} AND RE_STEP = 0
+	]]>
+	</select>
 	
 	<select id="getArticle" resultType="board">
 	<![CDATA[

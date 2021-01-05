@@ -9,7 +9,6 @@
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
 $(document).ready(function(){
-
 	$(".commentList").load("getCommentList.do?ref=${board.ref}");
 	
 	
@@ -31,6 +30,27 @@ $(document).ready(function(){
 			}
 		});	
 	});
+	
+	$("#deleteComment").click(function(){
+		alert("deleteComment");
+		/*
+		var query = {
+			seq: $("seq").val()
+		};
+		
+		$.ajax({
+			type: "GET",
+			url: "/myapp/deleteComment.do",
+			data: query,
+			success: function(data) {
+				$(".commentList").load("getCommentList.do");
+				document.location.reload();
+			}
+		});
+		*/
+	});
+	
+	
 });
 </script>
 <link rel="stylesheet" href="style.css" />
@@ -38,7 +58,7 @@ $(document).ready(function(){
 <body>
 <div align="center">
 <div class ="articleContent">
-<table border="1" width="450">
+<table border="1" width="500">
 	<tr>
 		<td width="70">제목</td>
 		<td>${board.subject }</td>
@@ -53,13 +73,15 @@ $(document).ready(function(){
 	</tr>
 	<tr>
 		<td>내용</td>
-		<td>${board.content }
+		<td><br>
+			<img src="files/${board.filename }" width="300"><br><br>
+			${board.content }
 		<br><br><br><br><br><br><br><br></td>
 	</tr>
 	<tr>
 		<td colspan="2" align="right">
 			<a href="getArticle.do?seq=${board.seq }&state=updateBoard">[글 수정]</a>
-			<a href="deleteBoard.do?seq=${board.seq }">[삭제]</a>
+			<a href="deleteBoard.do?ref=${board.ref }">[삭제]</a>
 			<a href="getArticleList.do">[목록]</a></td>
 	</tr>
 </table>
@@ -71,7 +93,7 @@ $(document).ready(function(){
 </div>
 
 <div class="insertComment">
-	<table border="1" width="450">
+	<table border="1" width="500">
 		<tr>
 			<td width="100">작성자</td>
 			<td><input type="text" id="writer" size="10"></td>
@@ -93,7 +115,7 @@ $(document).ready(function(){
 	<br>		
 </div>
 <div>
-	<table width="450">
+	<table width="500">
 		<tr><td align="right">
 			<input type="button" value="글 등록"
 				onclick="location.href='insertBoard.jsp'">

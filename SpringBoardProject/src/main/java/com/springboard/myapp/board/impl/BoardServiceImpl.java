@@ -14,6 +14,13 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardDao boardDao;
 
+	// 댓글의 글 번호 가져오기
+	@Override
+	public int getSeq(BoardVo vo) {
+		// TODO Auto-generated method stub
+		return boardDao.getSeq(vo);
+	}
+	
 	// 게시글 당 댓글 수 조회
 	@Override
 	public int getCommentCnt(BoardVo vo) {
@@ -56,18 +63,32 @@ public class BoardServiceImpl implements BoardService {
 		boardDao.updateReadcnt(vo);
 	}
 	
-	// 게시 글에 달린 댓글 수 갱신
+	// 게시 글에 달린 댓글 수 증가
 	@Override
 	public void updateCommenctcnt(BoardVo vo) {
 		// TODO Auto-generated method stub
 		boardDao.updateCommenctcnt(vo);
 	}
 	
-	// 글 삭제
+	// 게시 글에 달린 댓글 수 감소
+	@Override
+	public void discountCommenctcnt(BoardVo vo) {
+		// TODO Auto-generated method stub
+		boardDao.discountCommenctcnt(vo);
+	}
+	
+	// 글 그룹 삭제
 	@Override
 	public void deleteBoard(BoardVo vo) {
 		// TODO Auto-generated method stub
 		boardDao.deleteBoard(vo);
+	}
+	
+	// 댓글 삭제		
+	@Override
+	public void deleteComment(BoardVo vo) {
+		// TODO Auto-generated method stub
+		boardDao.deleteComment(vo);
 	}
 
 	@Override

@@ -11,14 +11,14 @@
 <body>
 <c:forEach items="${commentList }" var="comment">
 <div class="commentContent">
-	<table width="450">
+	<table width="500">
 		<tr><td colspan="3" align="right">
-			${comment.regdate }<hr></td></tr>
+			${comment.regdate }
+			<input type="hidden" name="seq" value="${comment.seq }"></td></tr>
 		<tr><td width="70">${comment.writer }</td>
-			<td>|&emsp;${comment.content }</td>
-			<td width="45">[<a href=
-				"deleteBoard.do?seq=${comment.seq }">삭제</a>]</td></tr>				
-		<tr><td colspan="3" align="right"><hr></td></tr>
+			<td>&emsp;${comment.content }</td>
+			<td width="45"><input type="button"	value="삭제" 
+				onclick="location.href='deleteComment.do?seq=${comment.seq}&ref=${comment.ref }'"></td></tr>		
 	</table><br>
 </div>
 </c:forEach>

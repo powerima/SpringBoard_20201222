@@ -1,5 +1,7 @@
 package com.springboard.myapp.board;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class BoardVo {
 	private int seq;
 	private String writer;
@@ -7,7 +9,9 @@ public class BoardVo {
 	private String subject;
 	private String passwd;
 	private String regdate;
+	private String filename;
 	private String ip;
+	private MultipartFile uploadFile;
 	private int readcnt;	
 	private int ref;	
 	private int re_step;
@@ -55,11 +59,23 @@ public class BoardVo {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 	public String getIp() {
 		return ip;
 	}
 	public void setIp(String ip) {
 		this.ip = ip;
+	}
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
 	}
 	public int getReadcnt() {
 		return readcnt;
@@ -124,9 +140,9 @@ public class BoardVo {
 	@Override
 	public String toString() {
 		return "BoardVo [seq=" + seq + ", writer=" + writer + ", content=" + content + ", subject=" + subject
-				+ ", passwd=" + passwd + ", regdate=" + regdate + ", ip=" + ip + ", readcnt=" + readcnt + ", ref=" + ref
-				+ ", re_step=" + re_step + ", pageNum=" + pageNum + ", commentcnt=" + commentcnt + ", state=" + state
-				+ "]";
+				+ ", passwd=" + passwd + ", regdate=" + regdate + ", filename=" + filename + ", ip=" + ip + ", readcnt="
+				+ readcnt + ", ref=" + ref + ", re_step=" + re_step + ", pageNum=" + pageNum + ", startRow=" + startRow
+				+ ", endRow=" + endRow + ", commentcnt=" + commentcnt + "]";
 	}
-	
+		
 }

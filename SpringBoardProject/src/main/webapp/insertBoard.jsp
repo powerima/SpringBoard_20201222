@@ -9,11 +9,11 @@
 </head>
 <body>
 <div align="center">
-<form action="insertArticle.do" method="post">
+<form action="insertArticle.do" method="post" enctype="multipart/form-data">
 <table border="1" width="500">
 	<tr>
 		<td>제목</td>
-		<td><input type="text" name="subject"></td>
+		<td><input type="text" name="subject" size="60"></td>
 	</tr>
 	<tr>
 		<td>작성자</td>
@@ -22,6 +22,10 @@
 	<tr>
 		<td>비밀번호</td>
 		<td><input type="password" name="passwd"></td>
+	</tr>
+	<tr>
+		<td>파일 업로드</td>
+		<td><input type="file" name="uploadFile"></td>
 	</tr>
 	<tr>
 		<td>내용</td>

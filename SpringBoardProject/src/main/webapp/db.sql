@@ -5,7 +5,8 @@ create table board_tbl_01(
 	content long,
 	subject nvarchar2(50),
 	passwd varchar2(20),
-	regdate date default sysdate,	
+	filename nvarchar2(60),
+	regdate date default sysdate,
 	ip varchar2(20),	
 	readcnt number,
 	commentcnt number(6),
@@ -15,8 +16,8 @@ create table board_tbl_01(
 
 
 -- article
-insert into board_tbl_01(seq, regdate, writer, content, subject, passwd, ip, readcnt, ref, re_step, commentcnt)
-values((select nvl(max(seq), 0)+1 from board_tbl_02), sysdate, ?, ?, ?, ?, ?, ?, (select nvc(max(ref), 0) + 1 from board_tbl_1), 0, 0);
+insert into board_tbl_01(seq, regdate, writer, content, subject, passwd, filename, ip, readcnt, ref, re_step, commentcnt)
+values((select nvl(max(seq), 0)+1 from board_tbl_02), sysdate, ?, ?, ?, ?, ?, ?, ?, (select nvc(max(ref), 0) + 1 from board_tbl_1), 0, 0);
 
 
 -- comment
@@ -46,7 +47,7 @@ select * from board_tbl_01 where seq = ?;
 delete from board_tbl_01 where seq = ?;
 
 -- update board
-update board_tbl_01 set writer =?, content = ?, subject = ?, passwd = ?
+update board_tbl_01 set writer =?, content = ?, subject = ?, passwd = ?, filename = ?
 where seq = ?;
 
 -- readcnt update
