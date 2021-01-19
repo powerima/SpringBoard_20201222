@@ -1,4 +1,4 @@
-package com.springboard.view.board;
+package com.springboard.view.controller;
 
 import java.io.File;
 import java.io.IOException;

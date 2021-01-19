@@ -1,4 +1,13 @@
-	
+
+
+create table member_tbl_01(
+	id varchar2(20),
+	password varchar2(100),
+	name nvarchar2(20),
+	role varchar2(20),
+);
+
+
 create table board_tbl_01(
 	seq number not null,
 	writer nvarchar2(20),
