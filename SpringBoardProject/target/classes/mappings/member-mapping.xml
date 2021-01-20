@@ -4,10 +4,10 @@
 
 	<insert id="insertMember">
 	<![CDATA[
-		INSERT INTO MEMBER_TBL_01(ID,
-			PASSWORD, NAME, ROLE)
-		VALUES(#{id}, #{password},
-			#{name}, #{role})
+		INSERT INTO MEMBER_TBL_01(ID, PASSWORD, NAME,
+			EMAIL, PHONE, POST, ADDRESS1, ADDRESS2, JOINDATE, ROLE)
+		VALUES(#{id}, #{password}, #{name}, #{email}, #{phone}, 
+			#{post}, #{address1}, #{address2}, SYSDATE, #{role})
 	]]>
 	</insert>
 
@@ -16,6 +16,11 @@
 		UPDATE MEMBER_TBL_01 SET
 			PASSWORD = #{password},
 			NAME = #{name},
+			EMAIL = #{email},
+			PHONE = #{phone},
+			POST = #{post},
+			ADDRESS1 = #{address1},
+			ADDRESS2 = #{address2},			
 			ROLE = #{role}
 		WHERE ID = #{id}
 	]]>	

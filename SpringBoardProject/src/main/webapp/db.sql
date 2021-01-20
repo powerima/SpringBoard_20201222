@@ -1,10 +1,17 @@
 
 
+
 create table member_tbl_01(
-	id varchar2(20),
-	password varchar2(100),
+	id varchar2(20) primary key,
+	password varchar2(100),	
 	name nvarchar2(20),
-	role varchar2(20),
+	email varchar2(100),
+	phone varchar2(20),
+	post varchar2(10),
+	address1 nvarchar2(50),
+	address2 nvarchar2(50),
+	joindate date,
+	role varchar2(20)
 );
 
 
@@ -24,6 +31,36 @@ create table board_tbl_01(
 );
 
 
+-------------- member ----------------
+
+-- insert admin
+insert into member_tbl_01
+values('admin', '1234', '관리자', 
+    'admin@mail.to', '010-1111-1111', '12345',
+    '서울시 강남구 압구정동', '2-1', sysdate, 'ROLE_ADMIN');
+    
+-- insert member
+insert into member_tbl_01(id, password, name, email, phone, post, address1, address2, joindate, role)
+values(?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+-- update member
+update member_tbl_01 set
+password = ?, name = ?, email = ?, phone = ?, post = ?, address1 = ?, address2 = ?, role = ?
+where id = ?
+
+-- delete member
+delete from member_tbl_01
+where id = ?
+
+-- select member
+select * from member_tbl_01
+where id = ?
+
+-- select all
+select * from member_tbl_01
+
+
+-------------- board -----------------
 -- article
 insert into board_tbl_01(seq, regdate, writer, content, subject, passwd, filename, ip, readcnt, ref, re_step, commentcnt)
 values((select nvl(max(seq), 0)+1 from board_tbl_02), sysdate, ?, ?, ?, ?, ?, ?, ?, (select nvc(max(ref), 0) + 1 from board_tbl_1), 0, 0);

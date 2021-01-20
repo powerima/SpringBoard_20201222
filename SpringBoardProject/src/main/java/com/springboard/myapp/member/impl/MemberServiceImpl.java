@@ -19,35 +19,35 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void insertMember(MemberVo vo) {
 		// TODO Auto-generated method stub
-		
+		memberDao.insertMember(vo);
 	}
 
 	// 회원 삭제
 	@Override
 	public void deleteMember(MemberVo vo) {
 		// TODO Auto-generated method stub
-		
+		memberDao.deleteMember(vo);
 	}
 
 	// 회원 수정
 	@Override
 	public void updateMember(MemberVo vo) {
 		// TODO Auto-generated method stub
-		
+		memberDao.updateMember(vo);
 	}
 
 	// 회원 조회
 	@Override
 	public MemberVo getMember(MemberVo vo) {
 		// TODO Auto-generated method stub
-		return null;
+		return memberDao.getMember(vo);
 	}
 
 	// 회원 목록 조회
 	@Override
 	public List<MemberVo> getMemberList(MemberVo vo) {
 		// TODO Auto-generated method stub
-		return null;
+		return memberDao.getMemberList(vo);
 	}
 
 }

@@ -2,19 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
-  
-    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="style.css" />
-</head>
-<body>
+<%@ include file="top.jsp" %>
+
 <div align="center">
+<h3>게시판</h3>
 <div>
-	<br><hr width="600">
+	<hr width="600">
 </div>
 <div>
 <table width="600">

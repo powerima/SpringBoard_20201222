@@ -20,34 +20,34 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public void insertMember(MemberVo vo) {
 		// TODO Auto-generated method stub
-		mybatis.insert("MemberDao", vo);
+		mybatis.insert("MemberDao.insertMember", vo);
 	}
 
 	// 회원 삭제
 	@Override
 	public void deleteMember(MemberVo vo) {
 		// TODO Auto-generated method stub
-		mybatis.delete("MemberDao", vo);
+		mybatis.delete("MemberDao.deleteMember", vo);
 	}
 
 	// 회원 수정
 	@Override
 	public void updateMember(MemberVo vo) {
 		// TODO Auto-generated method stub
-		mybatis.update("MemberDao", vo);
+		mybatis.update("MemberDao.updateMember", vo);
 	}
 
 	// 회원 조회
 	@Override
 	public MemberVo getMember(MemberVo vo) {
 		// TODO Auto-generated method stub
-		return mybatis.selectOne("MemberDao", vo);
+		return mybatis.selectOne("MemberDao.getMember", vo);
 	}
 
 	// 회원 목록 조회
 	@Override
 	public List<MemberVo> getMemberList(MemberVo vo) {
 		// TODO Auto-generated method stub
-		return mybatis.selectList("MemberDao");
+		return mybatis.selectList("MemberDao.getMemberList");
 	}
 }

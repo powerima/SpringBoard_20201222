@@ -18,18 +18,30 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.springboard.myapp.board.BoardService;
 import com.springboard.myapp.board.BoardVo;
+import com.springboard.myapp.member.MemberVo;
 
 @Controller
-@SessionAttributes("board")
+@SessionAttributes({"board", "member"})
 public class BoardController {
 	@Autowired
 	private BoardService bs;
 	private static final String REALPATH = "files/";
 	
+	@ModelAttribute("member")
+	public MemberVo setMemberVo() {
+		return new MemberVo();
+	}
+	
 	// 댓글 등록
 	@RequestMapping(value="insertComment.do")
-	public void insertComment(BoardVo vo, HttpServletRequest request, 
-					HttpServletResponse response, Model model) {
+	public void insertComment(@ModelAttribute("member") MemberVo member, BoardVo vo, 
+				HttpServletRequest request,	HttpServletResponse response, Model model) {
+		
+		if(member.getId() == null) {
+			return;
+		}
+		
+		
 		vo.setIp(request.getRemoteAddr());
 		bs.insertCommnet(vo);			// 댓글 등록
 		bs.updateCommenctcnt(vo);		// 댓글 수 증가
@@ -46,8 +58,13 @@ public class BoardController {
 		
 	// 글 등록
 	@RequestMapping(value="insertArticle.do")
-	public String insertArticle(
-			BoardVo vo, HttpServletRequest request) throws IOException {
+	public String insertArticle(@ModelAttribute("member") MemberVo member,
+				BoardVo vo, HttpServletRequest request) throws IOException {
+		
+		if(member.getId() == null) {
+			return "redirect:login.do";
+		}
+		
 		String realPath = request.getSession().getServletContext().getRealPath(REALPATH);	// 실제 경로
 		String fileName = "";	// 수정된 실제 파일 이름
 			
@@ -88,8 +105,13 @@ public class BoardController {
 	
 	// 글 수정
 	@RequestMapping(value="updateArticle.do")
-	public String updateArticle(
+	public String updateArticle(@ModelAttribute("member") MemberVo member,
 				@ModelAttribute("board") BoardVo vo, HttpServletRequest request) throws IOException {
+		
+		if(member.getId() == null) {
+			return "redirect:login.do";
+		}
+		
 		String realPath = request.getSession().getServletContext().getRealPath(REALPATH);	// 실제 경로
 		String preFileName = vo.getFilename();
 		String fileName = "";	// 수정된 실제 파일 이름
@@ -137,7 +159,13 @@ public class BoardController {
 	
 	// 글 삭제
 	@RequestMapping(value="deleteArticle.do")
-	public String deleteBoard(BoardVo vo, HttpServletRequest request) {
+	public String deleteBoard(@ModelAttribute("member") MemberVo member,
+						BoardVo vo, HttpServletRequest request) {
+		
+		if(member.getId() == null) {
+			return "redirect:login.do";
+		}
+		
 		String realPath = request.getSession().getServletContext().getRealPath(REALPATH);	// 실제 경로
 		String fileName = vo.getFilename();	// 수정된 실제 파일 이름
 		
@@ -153,7 +181,12 @@ public class BoardController {
 
 	// 댓글 삭제
 	@RequestMapping(value="deleteComment.do")
-	public String deleteComment(BoardVo vo) {
+	public String deleteComment(@ModelAttribute("member") MemberVo member, BoardVo vo) {
+		
+		if(member.getId() == null) {
+			return "redirect:login.do";
+		}
+		
 		
 		int seq = bs.getSeq(vo);
 		
@@ -166,7 +199,14 @@ public class BoardController {
 	
 	// 게시 글 상세 조회
 	@RequestMapping(value="getArticle.do")
-	public String getArticle(BoardVo vo, Model model, HttpServletRequest request) {
+	public String getArticle(@ModelAttribute("member") MemberVo member, 
+					BoardVo vo, Model model, HttpServletRequest request) {
+		
+		if(member.getId() == null) {
+			return "redirect:login.do";
+		}
+		
+		
 		String next = "";
 		System.out.println(vo);
 		bs.updateReadcnt(vo);	// 조회수 증가
@@ -184,7 +224,14 @@ public class BoardController {
 	
 	// 글 목록 조회
 	@RequestMapping(value="getArticleList.do")
-	public String getArticleList(BoardVo vo, Model model) {
+	public String getArticleList(@ModelAttribute("member") MemberVo member,
+							BoardVo vo, Model model) {
+		
+		if(member.getId() == null) {
+			return "redirect:login.do";
+		}
+		
+		
 		// 페이지 나누기
 		if(vo.getPageNum() == 0 ) vo.setPageNum(1);
 		int currentPage = vo.getPageNum();
@@ -227,7 +274,10 @@ public class BoardController {
 	
 	// 댓글 목록 조회
 	@RequestMapping(value="getCommentList.do")
-	public String getCommentList(BoardVo vo, Model model) {
+	public String getCommentList(
+						BoardVo vo, Model model) {
+		
+		
 		model.addAttribute("commentList", bs.getCommentList(vo));
 		return "getCommentList.jsp";
 	}
@@ -249,6 +299,7 @@ public class BoardController {
 			vo.setSubject("board Test" + i);
 			vo.setPasswd("1234");
 			vo.setIp(request.getRemoteAddr());
+			vo.setFilename("empty.jpg");
 			bs.insertArticle(vo);
 		}
 	}

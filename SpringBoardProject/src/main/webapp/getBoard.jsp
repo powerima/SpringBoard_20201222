@@ -1,78 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<script>
-$(document).ready(function(){
-	$(".commentList").load("getCommentList.do?ref=${board.ref}");
-	
-	
-	$("#insertComment").click(function(){
-		var query = {
-			writer: $("#writer").val(),
-			content: $("#content").val(),
-			passwd: $("#passwd").val(),
-			ref: $("#ref").val()
-		};
-		
-		$.ajax({
-			type: "GET",
-			url: "/myapp/insertComment.do",
-			data: query,
-			success: function(data) {
-				$(".commentList").load("getCommentList.do");
-				document.location.reload();
-			}
-		});	
-	});
-	
-	$("#deleteComment").click(function(){
-		alert("deleteComment");
-		/*
-		var query = {
-			seq: $("seq").val()
-		};
-		
-		$.ajax({
-			type: "GET",
-			url: "/myapp/deleteComment.do",
-			data: query,
-			success: function(data) {
-				$(".commentList").load("getCommentList.do");
-				document.location.reload();
-			}
-		});
-		*/
-	});
-	
-	
-});
-</script>
-<link rel="stylesheet" href="style.css" />
-</head>
-<body>
+<%@ include file="top.jsp" %>
+
 <div align="center">
+<h3>게시판</h3>
 <div class ="articleContent">
 <table border="1" width="500">
 	<tr>
-		<td width="70">제목</td>
+		<td width="70" align="center">제목</td>
 		<td>${board.subject }</td>
 	</tr>
 	<tr>
-		<td>조회수</td>
+		<td align="center">조회수</td>
 		<td>${board.readcnt }</td>
 	</tr>
 	<tr>
-		<td>작성자</td>
+		<td align="center">작성자</td>
 		<td>${board.writer }</td>
 	</tr>
 	<tr>
-		<td>내용</td>
+		<td align="center">내용</td>
 		<td><br>
 			<img src="files/${board.filename }" width="300"><br><br>
 			${board.content }
@@ -129,4 +77,50 @@ $(document).ready(function(){
 <br><br><br>
 </div>
 </body>
+<script>
+$(document).ready(function(){
+	$(".commentList").load("getCommentList.do?ref=${board.ref}");
+	
+	
+	$("#insertComment").click(function(){
+		var query = {
+			writer: $("#writer").val(),
+			content: $("#content").val(),
+			passwd: $("#passwd").val(),
+			ref: $("#ref").val()
+		};
+		
+		$.ajax({
+			type: "GET",
+			url: "/myapp/insertComment.do",
+			data: query,
+			success: function(data) {
+				$(".commentList").load("getCommentList.do");
+				document.location.reload();
+			}
+		});	
+	});
+	
+	$("#deleteComment").click(function(){
+		alert("deleteComment");
+		/*
+		var query = {
+			seq: $("seq").val()
+		};
+		
+		$.ajax({
+			type: "GET",
+			url: "/myapp/deleteComment.do",
+			data: query,
+			success: function(data) {
+				$(".commentList").load("getCommentList.do");
+				document.location.reload();
+			}
+		});
+		*/
+	});
+	
+	
+});
+</script>
 </html>
