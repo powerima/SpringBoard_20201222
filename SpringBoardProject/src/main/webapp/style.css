@@ -3,6 +3,7 @@
 body {
 	margin:0;
 	padding:0;
+	font-size:12px;
 }
 
 table, tr, td {
@@ -13,8 +14,8 @@ table, tr, td {
 nav{
 	padding-top:10px;
 	padding-left:30px;
-	font-size: 14px;
-	height:30px;	
+	font-size: 12px;
+	height:20px;	
 	color:black;
 	background:lightblue;
 }

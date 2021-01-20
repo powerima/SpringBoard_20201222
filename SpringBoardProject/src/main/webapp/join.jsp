@@ -6,7 +6,7 @@
 <h3>회원 등록</h3>
 <hr width="80%">
 <form action="join.do" method="post">
-<table border="1">
+<table border="1" width="500">
 	<tr>
 		<td align=center>아이디</td>
 		<td><input type="text" name="id"></td>

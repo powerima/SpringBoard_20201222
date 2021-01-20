@@ -36,7 +36,7 @@ public class LoginController {
 	public String join(MemberVo vo) {
 		vo.setRole("ROLE_MEMBER");
 		ms.insertMember(vo);
-		return "redirect:login.do";
+		return "forward:index.jsp";
 	}
 	
 	// 로그인 화면으로 이동
@@ -54,7 +54,7 @@ public class LoginController {
 				&& findMember.getPassword().equals(vo.getPassword())) {
 			model.addAttribute("member", findMember);
 			
-			return "forward:getArticleList.do";
+			return "forward:index.jsp";
 		}
 		return "redirect:login.do";
 	}
@@ -63,7 +63,7 @@ public class LoginController {
 	@RequestMapping(value="logout.do")
 	public String logout(SessionStatus status) {
 		status.setComplete();
-		return "redirect:login.do";
+		return "forward:index.jsp";
 	}
 	
 	// 회원 정보 수정 화면으로 이동

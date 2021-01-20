@@ -28,9 +28,9 @@
 	</tr>
 	<tr>
 		<td colspan="2" align="right">
-			<a href="getArticle.do?seq=${board.seq }&state=updateBoard">[글 수정]</a>
-			<a href="deleteBoard.do?ref=${board.ref }">[삭제]</a>
-			<a href="getArticleList.do">[목록]</a></td>
+			[<a href="getArticle.do?seq=${board.seq }&state=updateBoard">글 수정</a>]
+			[<a href="deleteBoard.do?ref=${board.ref }">삭제</a>]
+			[<a href="getArticleList.do">목록</a>]</td>
 	</tr>
 </table>
 <br><br>

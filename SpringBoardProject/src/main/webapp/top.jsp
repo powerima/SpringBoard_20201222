@@ -13,7 +13,8 @@
 </head>
 <body>
 <nav>
-	<a href="join.jsp">회원 등록</a>&emsp;&emsp;	
+	<a href="index.jsp">메인 화면</a>&emsp;&emsp;	
+	<a href="join.do">회원 등록</a>&emsp;&emsp;	
 	<c:if test="${sessionScope.member.id == null }"><a href="login.do">회원 로그인</a></c:if>
 	
 	<c:if test="${sessionScope.member.id != null }">
