@@ -123,6 +123,7 @@
 	<![CDATA[
 		SELECT * FROM BOARD_TBL_01
 		WHERE REF = #{ref} AND RE_STEP > 0 
+		ORDER BY RE_STEP
 	]]>
 	</select>
 

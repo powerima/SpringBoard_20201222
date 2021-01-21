@@ -8,7 +8,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<script type="text/javascript" src="script.js"></script>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>

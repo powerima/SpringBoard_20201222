@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
 	
-		<!-- 한글 인코딩 처리를 위한 CharacterEncodingFilter 선언 -->
+	<!-- 한글 인코딩 처리를 위한 CharacterEncodingFilter 선언 -->
 	<filter>
 		<filter-name>characterEncoding</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

@@ -118,6 +118,7 @@ public class BoardDaoImpl implements BoardDao {
 		return mybatis.selectList("BoardDao.getArticleList", vo);
 	}
 
+	// 댓글 목록 조회
 	@Override
 	public List<BoardVo> getCommentList(BoardVo vo) {
 		// TODO Auto-generated method stub

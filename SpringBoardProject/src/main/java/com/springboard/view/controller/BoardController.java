@@ -36,7 +36,7 @@ public class BoardController {
 	@RequestMapping(value="insertComment.do")
 	public void insertComment(@ModelAttribute("member") MemberVo member, BoardVo vo, 
 				HttpServletRequest request,	HttpServletResponse response, Model model) {
-		
+		System.out.println("==============insertComments=============");
 		if(member.getId() == null) {
 			return;
 		}
@@ -161,7 +161,6 @@ public class BoardController {
 	@RequestMapping(value="deleteArticle.do")
 	public String deleteBoard(@ModelAttribute("member") MemberVo member,
 						BoardVo vo, HttpServletRequest request) {
-		
 		if(member.getId() == null) {
 			return "redirect:login.do";
 		}
@@ -182,7 +181,7 @@ public class BoardController {
 	// 댓글 삭제
 	@RequestMapping(value="deleteComment.do")
 	public String deleteComment(@ModelAttribute("member") MemberVo member, BoardVo vo) {
-		
+		System.out.println("==============deleteComment==============");
 		if(member.getId() == null) {
 			return "redirect:login.do";
 		}
