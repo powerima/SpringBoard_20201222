@@ -16,7 +16,7 @@
 	<c:if test="${sessionScope.member.id != null }">
 		<a href="logout.do">로그아웃</a></c:if>
 <br><br>
-<br><br><br><br>Eclipse EE, Spring 4.2.4, JDK 11.0.9, MyBatis 
+<br><br><br><br>Eclipse EE, Spring 4.2.4, JDK 11.0.9, MyBatis, Oracle 11g EX 
 <br><br> https://github.com/powerima/SpringBoard_20201222.git
 </div>
 </body>
