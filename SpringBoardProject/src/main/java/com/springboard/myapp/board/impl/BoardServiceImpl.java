@@ -91,6 +91,7 @@ public class BoardServiceImpl implements BoardService {
 		boardDao.deleteComment(vo);
 	}
 
+	// 게시 글 상세 조회
 	@Override
 	public BoardVo getBoard(BoardVo vo) {
 		// TODO Auto-generated method stub

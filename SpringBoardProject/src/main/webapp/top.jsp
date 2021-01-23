@@ -8,20 +8,20 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="/myapp/css/style.css" />
 </head>
 <body>
 <nav>
-	<a href="index.jsp">메인 화면</a>&emsp;&emsp;	
-	<a href="join.do">회원 등록</a>&emsp;&emsp;	
-	<c:if test="${sessionScope.member.id == null }"><a href="login.do">회원 로그인</a></c:if>
+	<a href="/myapp/index.jsp">메인 화면</a>&emsp;&emsp;	
+	<a href="/myapp/system/join.do">회원 등록</a>&emsp;&emsp;	
+	<c:if test="${sessionScope.member.id == null }"><a href="/myapp/system/login.do">회원 로그인</a></c:if>
 	
 	<c:if test="${sessionScope.member.id != null }">
-		<a href="getArticleList.do">게시판</a>&emsp;&emsp;</c:if>
+		<a href="/myapp/board/getArticleList.do">게시판</a>&emsp;&emsp;</c:if>
 	<c:if test="${sessionScope.member.id != null }">
-		<a href="getMember.do">회원 정보</a>&emsp;&emsp;</c:if>	
+		<a href="/myapp/member/getMember.do">회원 정보</a>&emsp;&emsp;</c:if>	
 	<c:if test="${sessionScope.member.role == 'ROLE_ADMIN' }">
-		<a href="getMemberList.do">회원 목록</a>&emsp;&emsp;</c:if>
+		<a href="/myapp/member/getMemberList.do">회원 목록</a>&emsp;&emsp;</c:if>
 	<c:if test="${sessionScope.member.id != null }">
-		<a href="logout.do">로그아웃</a></c:if>
+		<a href="/myapp/system/logout.do">로그아웃</a></c:if>
 </nav>

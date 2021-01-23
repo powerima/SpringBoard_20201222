@@ -92,17 +92,18 @@ public class BoardDaoImpl implements BoardDao {
 		mybatis.delete("BoardDao.deleteComment", vo);
 	}
 	
+	// 게시 글 상세 조회
 	@Override
 	public BoardVo getBoard(BoardVo vo) {
 		// TODO Auto-generated method stub
-		return null;
+		return mybatis.selectOne("BoardDao.getBoard", vo);
 	}
 
 	// 게시 글 상세 조회
 	@Override
 	public BoardVo getArticle(BoardVo vo) {
 		// TODO Auto-generated method stub
-		return mybatis.selectOne("BoardDao.getArticle", vo);
+		return mybatis.selectOne("BoardDao.getBoard", vo);
 	}
 
 	@Override

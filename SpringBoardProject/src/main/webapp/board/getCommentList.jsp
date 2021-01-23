@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 <c:forEach items="${commentList }" var="comment">
@@ -15,10 +15,10 @@
 		<tr><td colspan="3" align="right">
 			${comment.regdate }
 			<input type="hidden" name="seq" value="${comment.seq }"></td></tr>
-		<tr><td width="70">${comment.writer }</td>
+		<tr><td width="70">${comment.member_id }</td>
 			<td>&emsp;${comment.content }</td>
 			<td width="45"><input type="button"	value="삭제" 
-				onclick="location.href='deleteComment.do?seq=${comment.seq}&ref=${comment.ref }'"></td></tr>		
+				onclick="location.href='/myapp/board/deleteComment.do?seq=${comment.seq}&ref=${comment.ref }'"></td></tr>		
 	</table><br>
 </div>
 </c:forEach>

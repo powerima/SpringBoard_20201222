@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
-<%@ include file="top.jsp" %>
+<%@ include file="../top.jsp" %>
 
 <div align="center">
 <h3>게시판</h3>
@@ -17,20 +17,20 @@
 	</tr>
 	<tr>
 		<td align="center">작성자</td>
-		<td>${board.writer }</td>
+		<td>${board.member_id }</td>
 	</tr>
 	<tr>
 		<td align="center">내용</td>
 		<td><br>
-			<img src="files/${board.filename }" width="300"><br><br>
+			<img src="../files/${board.filename }" width="300"><br><br>
 			${board.content }
 		<br><br><br><br><br><br><br><br></td>
 	</tr>
 	<tr>
 		<td colspan="2" align="right">
-			[<a href="getArticle.do?seq=${board.seq }&state=updateBoard">글 수정</a>]
-			[<a href="deleteBoard.do?ref=${board.ref }">삭제</a>]
-			[<a href="getArticleList.do">목록</a>]</td>
+			[<a href="/myapp/board/getArticle.do?seq=${board.seq }">글 수정</a>]
+			[<a href="/myapp/board/deleteBoard.do?ref=${board.ref }">삭제</a>]
+			[<a href="/myapp/board/getArticleList.do">목록</a>]</td>
 	</tr>
 </table>
 <br><br>
@@ -44,10 +44,9 @@
 	<table border="1" width="500">
 		<tr>
 			<td width="100">작성자</td>
-			<td><input type="text" id="writer" size="10"></td>
-			<td>비밀번호</td>
-			<td><input type="password" id="passwd" size="8">
-				<input type="hidden" id="ref" value="${board.ref }"></td>
+			<td><input type="hidden" id="ref" value="${board.ref }">
+				<input type="hidden" id="member_id" size="10"
+					value="${member.id }">${member.id }</td>
 		</tr>
 		<tr>
 			<td>내용</td>
@@ -79,23 +78,22 @@
 </body>
 <script>
 $(document).ready(function(){
-	$(".commentList").load("getCommentList.do?ref=${board.ref}");
+	$(".commentList").load("/myapp/board/getCommentList.do?ref=${board.ref}");
 	
 	
 	$("#insertComment").click(function(){
 		var query = {
-			writer: $("#writer").val(),
+			member_id: $("#member_id").val(),
 			content: $("#content").val(),
-			passwd: $("#passwd").val(),
 			ref: $("#ref").val()
 		};
 		
 		$.ajax({
 			type: "GET",
-			url: "/myapp/insertComment.do",
+			url: "/myapp/board/insertComment.do",
 			data: query,
 			success: function(data) {
-				$(".commentList").load("getCommentList.do");
+				$(".commentList").load("/myapp/board/getCommentList.do");
 				document.location.reload();
 			}
 		});	

@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="top.jsp" %>
+<%@ include file="../top.jsp" %>
 
 <div align="center">
 <h3>로그인</h3>
 <hr width="80%">
-<form action="login.do" method="post">
+<form action="/myapp/system/login.do" method="post">
 <table border="1">
 	<tr>
 		<td align="center">아이디</td>

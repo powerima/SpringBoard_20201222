@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="top.jsp" %>
+<%@ include file="../top.jsp" %>
 
 <div align="center">
 <h3>회원 정보</h3>
@@ -37,7 +37,7 @@
 </table>
 
 <br>
-[<a href="updateMember.do">회원 정보 수정</a>]
+[<a href="/myapp/member/updateMember.do">회원 정보 수정</a>]
 </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 
-
+drop table board_tbl_01;
 
 create table member_tbl_01(
 	id varchar2(20) primary key,
@@ -16,8 +16,7 @@ create table member_tbl_01(
 
 
 create table board_tbl_01(
-	seq number not null,
-	writer nvarchar2(20),
+	seq number not null,	
 	content long,
 	subject nvarchar2(50),
 	passwd varchar2(20),
@@ -27,10 +26,12 @@ create table board_tbl_01(
 	readcnt number,
 	commentcnt number(6),
 	ref number(6),
-	re_step number(6)	
+	re_step number(6),
+	member_id varchar2(20) references member_tbl_01(id)
 );
 
-
+select * from board_tbl_01;
+select * from member_tbl_01;
 -------------- member ----------------
 
 -- insert admin

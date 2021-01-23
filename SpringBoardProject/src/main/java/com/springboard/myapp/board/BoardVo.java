@@ -4,10 +4,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class BoardVo {
 	private int seq;
-	private String writer;
+	private String member_id;
 	private String content;
 	private String subject;
-	private String passwd;
 	private String regdate;
 	private String filename;
 	private String ip;
@@ -21,7 +20,6 @@ public class BoardVo {
 	private int commentcnt;
 	private String searchCondition;
 	private String searchKeyword;
-	private String state;
 	
 	public int getSeq() {
 		return seq;
@@ -29,11 +27,11 @@ public class BoardVo {
 	public void setSeq(int seq) {
 		this.seq = seq;
 	}
-	public String getWriter() {
-		return writer;
+	public String getMember_id() {
+		return member_id;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
 	}
 	public String getContent() {
 		return content;
@@ -46,12 +44,6 @@ public class BoardVo {
 	}
 	public void setSubject(String subject) {
 		this.subject = subject;
-	}
-	public String getPasswd() {
-		return passwd;
-	}
-	public void setPasswd(String passwd) {
-		this.passwd = passwd;
 	}
 	public String getRegdate() {
 		return regdate;
@@ -113,6 +105,12 @@ public class BoardVo {
 	public void setEndRow(int endRow) {
 		this.endRow = endRow;
 	}
+	public int getCommentcnt() {
+		return commentcnt;
+	}
+	public void setCommentcnt(int commentcnt) {
+		this.commentcnt = commentcnt;
+	}
 	public String getSearchCondition() {
 		return searchCondition;
 	}
@@ -125,24 +123,11 @@ public class BoardVo {
 	public void setSearchKeyword(String searchKeyword) {
 		this.searchKeyword = searchKeyword;
 	}
-	public String getState() {
-		return state;
-	}
-	public void setState(String state) {
-		this.state = state;
-	}
-	public int getCommentcnt() {
-		return commentcnt;
-	}
-	public void setCommentcnt(int commentcnt) {
-		this.commentcnt = commentcnt;
-	}
 	@Override
 	public String toString() {
-		return "BoardVo [seq=" + seq + ", writer=" + writer + ", content=" + content + ", subject=" + subject
-				+ ", passwd=" + passwd + ", regdate=" + regdate + ", filename=" + filename + ", ip=" + ip + ", readcnt="
+		return "BoardVo [seq=" + seq + ", member_id=" + member_id + ", content=" + content + ", subject=" + subject
+				+ ", regdate=" + regdate + ", filename=" + filename + ", ip=" + ip + ", readcnt="
 				+ readcnt + ", ref=" + ref + ", re_step=" + re_step + ", pageNum=" + pageNum + ", startRow=" + startRow
 				+ ", endRow=" + endRow + ", commentcnt=" + commentcnt + "]";
 	}
-		
 }

@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="top.jsp" %>
+<%@ include file="../top.jsp" %>
 
 <div align="center">
 <h3>게시판</h3>
-<form action="insertArticle.do" method="post" enctype="multipart/form-data">
+<form action="/myapp/board/insertArticle.do" method="post" enctype="multipart/form-data">
 <table border="1" width="500">
 	<tr>
 		<td>제목</td>
@@ -12,11 +12,8 @@
 	</tr>
 	<tr>
 		<td>작성자</td>
-		<td><input type="text" name="writer"></td>
-	</tr>
-	<tr>
-		<td>비밀번호</td>
-		<td><input type="password" name="passwd"></td>
+		<td><input type="hidden" name="member_id" 
+			value="${member.id }">${member.id }</td>
 	</tr>
 	<tr>
 		<td>파일 업로드</td>

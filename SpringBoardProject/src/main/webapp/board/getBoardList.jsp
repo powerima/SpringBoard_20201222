@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
-<%@ include file="top.jsp" %>
+<%@ include file="../top.jsp" %>
 
 <div align="center">
 <h3>게시판</h3>
@@ -21,13 +21,12 @@
 <c:forEach items="${boardList }" var="board">
 	<tr>
 		<td>${board.seq }</td>
-		<td><a href="getArticle.do?seq=${board.seq}
-					&state=getBoard">${board.subject }</a>
+		<td><a href="/myapp/board/getArticle.do?seq=${board.seq}">${board.subject }</a>
 		<c:if test="${board.commentcnt > 0}">
 			&nbsp;[${board.commentcnt }]
 		</c:if>			
 		</td>
-		<td>${board.writer }</td>
+		<td>${board.member_id }</td>
 		<td>${fn:substring(board.regdate, 0, 10) }</td>
 		<td>${board.readcnt }</td>
 	</tr>
@@ -39,9 +38,9 @@
 		<tr>
 			<td align="right">
 				<input type="button" value="글 등록" 
-					onclick="location.href='insertBoard.jsp'">
+					onclick="location.href='/myapp/board/insertArticle.do'">
 				<input type="button" value="전체 목록" 
-					onclick="location.href='getArticleList.do'"></td></tr>
+					onclick="location.href='/myapp/board/getArticleList.do'"></td></tr>
 	</table>
 	<hr width="600">
 </div>
@@ -71,7 +70,7 @@
 <form action="getArticleList.do">
 <select name="searchCondition">
 	<option value="subject">제목</option>
-	<option value="writer">작성자</option>
+	<option value="member_id">작성자</option>
 </select>
 <input type="text" name="searchKeyword" />
 <input type="submit" value="검색" />

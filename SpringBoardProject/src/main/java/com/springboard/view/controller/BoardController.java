@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,6 +23,7 @@ import com.springboard.myapp.member.MemberVo;
 
 @Controller
 @SessionAttributes({"board", "member"})
+@RequestMapping("/board/")
 public class BoardController {
 	@Autowired
 	private BoardService bs;
@@ -36,7 +38,6 @@ public class BoardController {
 	@RequestMapping(value="insertComment.do")
 	public void insertComment(@ModelAttribute("member") MemberVo member, BoardVo vo, 
 				HttpServletRequest request,	HttpServletResponse response, Model model) {
-		System.out.println("==============insertComments=============");
 		if(member.getId() == null) {
 			return;
 		}
@@ -55,14 +56,25 @@ public class BoardController {
 			e.printStackTrace();
 		}
 	}
-		
+
+	// 글 등록 화면 이동
+	@RequestMapping(value="insertArticle.do", method=RequestMethod.GET)
+	public String insertArticleView(@ModelAttribute("member") MemberVo member, Model model) {
+		if(member.getId() == null) {
+			return "redirect:../system/login.do";
+		}
+		model.addAttribute("member", member);		
+		return "insertBoard.jsp";
+	}
+	
+	
 	// 글 등록
-	@RequestMapping(value="insertArticle.do")
+	@RequestMapping(value="insertArticle.do", method=RequestMethod.POST)
 	public String insertArticle(@ModelAttribute("member") MemberVo member,
 				BoardVo vo, HttpServletRequest request) throws IOException {
 		
 		if(member.getId() == null) {
-			return "redirect:login.do";
+			return "redirect:../system/login.do";
 		}
 		
 		String realPath = request.getSession().getServletContext().getRealPath(REALPATH);	// 실제 경로
@@ -100,16 +112,25 @@ public class BoardController {
 		
 		bs.insertArticle(vo);
 		
-		return "getArticleList.do";
+		return "redirect:getArticleList.do";
 	}
 	
+	// 글 수정 화면 이동
+	@RequestMapping(value="updateArticle.do", method=RequestMethod.GET)
+	public String updateArticleView(BoardVo vo, Model model) {
+		model.addAttribute("board", bs.getArticle(vo));
+		return "updateBoard.jsp";
+	}
+	
+	
+	
 	// 글 수정
-	@RequestMapping(value="updateArticle.do")
+	@RequestMapping(value="updateArticle.do", method=RequestMethod.POST)
 	public String updateArticle(@ModelAttribute("member") MemberVo member,
 				@ModelAttribute("board") BoardVo vo, HttpServletRequest request) throws IOException {
 		
 		if(member.getId() == null) {
-			return "redirect:login.do";
+			return "redirect:../system/login.do";
 		}
 		
 		String realPath = request.getSession().getServletContext().getRealPath(REALPATH);	// 실제 경로
@@ -154,28 +175,36 @@ public class BoardController {
 		vo.setFilename(fileName);
 		bs.updateArticle(vo);
 		
-		return "getArticleList.do";
+		return "redirect:getArticleList.do";
 	}
 	
 	// 글 삭제
 	@RequestMapping(value="deleteArticle.do")
 	public String deleteBoard(@ModelAttribute("member") MemberVo member,
 						BoardVo vo, HttpServletRequest request) {
+		// 로그인 여부 검사
 		if(member.getId() == null) {
-			return "redirect:login.do";
+			return "redirect:../system/login.do";
 		}
 		
-		String realPath = request.getSession().getServletContext().getRealPath(REALPATH);	// 실제 경로
-		String fileName = vo.getFilename();	// 수정된 실제 파일 이름
+		vo = bs.getBoard(vo);
 		
-		// 업로드된 파일 삭제
-		if(fileName != null && !fileName.equals("empty.jpg")) {	// 업로드된 파일 존재 여부 확인
-			File f = new File(realPath + fileName);
-			f.delete();			// 파일 삭제
-		}
+		// 권한 여부 검사
+		if(member.getRole().equals("ROLE_ADMIN") || member.getId().equals(vo.getMember_id())) {
+			String realPath = request.getSession().getServletContext().getRealPath(REALPATH);	// 실제 경로
+			String fileName = vo.getFilename();	// 수정된 실제 파일 이름
+			
+			// 업로드된 파일 삭제
+			if(fileName != null && !fileName.equals("empty.jpg")) {	// 업로드된 파일 존재 여부 확인
+				File f = new File(realPath + fileName);
+				f.delete();			// 파일 삭제
+			}
 
-		bs.deleteBoard(vo);
-		return "getArticleList.do";
+			bs.deleteBoard(vo);
+			return "redirect:getArticleList.do";
+		}
+		
+		return "../system/accessDenied.jsp";
 	}
 
 	// 댓글 삭제
@@ -183,11 +212,8 @@ public class BoardController {
 	public String deleteComment(@ModelAttribute("member") MemberVo member, BoardVo vo) {
 		System.out.println("==============deleteComment==============");
 		if(member.getId() == null) {
-			return "redirect:login.do";
+			return "redirect:/system/login.do";
 		}
-		
-		
-		int seq = bs.getSeq(vo);
 		
 		bs.discountCommenctcnt(vo);			// 댓글 수 감소
 		bs.deleteComment(vo);				// 글 삭제
@@ -202,23 +228,13 @@ public class BoardController {
 					BoardVo vo, Model model, HttpServletRequest request) {
 		
 		if(member.getId() == null) {
-			return "redirect:login.do";
+			return "redirect:../system/login.do";
 		}
-		
-		
-		String next = "";
-		System.out.println(vo);
+				
 		bs.updateReadcnt(vo);	// 조회수 증가
 		model.addAttribute("board", bs.getArticle(vo));
-		
-		if(vo.getState() == null || vo.getState().equals("getBoard")) {			
-			next = "getBoard.jsp";	
-			
-		} else if(vo.getState().equals("updateBoard")) {
-			next = "updateBoard.jsp";
-		}
-		
-		return next;
+				
+		return "getBoard.jsp";
 	}
 	
 	// 글 목록 조회
@@ -227,7 +243,7 @@ public class BoardController {
 							BoardVo vo, Model model) {
 		
 		if(member.getId() == null) {
-			return "redirect:login.do";
+			return "redirect:../system/login.do";
 		}
 		
 		
@@ -273,9 +289,11 @@ public class BoardController {
 	
 	// 댓글 목록 조회
 	@RequestMapping(value="getCommentList.do")
-	public String getCommentList(
+	public String getCommentList(@ModelAttribute("member") MemberVo member,
 						BoardVo vo, Model model) {
-		
+		if(member.getId() == null) {
+			return "redirect:../system/login.do";
+		}
 		
 		model.addAttribute("commentList", bs.getCommentList(vo));
 		return "getCommentList.jsp";
@@ -283,7 +301,7 @@ public class BoardController {
 		
 	// testBoard insert big data
 	@RequestMapping(value="testInsertBoard.do")
-	public void testInsertBoard(HttpServletRequest request) {
+	public String testInsertBoard(HttpServletRequest request) {
 		BoardVo vo = new BoardVo(); 
 		String content = "test";
 		
@@ -293,14 +311,15 @@ public class BoardController {
 		
 		
 		for(int i = 1; i < 255; i++) {
-			vo.setWriter("test" + i);
+			vo.setMember_id("admin");
 			vo.setContent(content);
 			vo.setSubject("board Test" + i);
-			vo.setPasswd("1234");
 			vo.setIp(request.getRemoteAddr());
 			vo.setFilename("empty.jpg");
 			bs.insertArticle(vo);
 		}
+		
+		return "../index.jsp";
 	}
 		
 }

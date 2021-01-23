@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="top.jsp" %>
+<%@ include file="../top.jsp" %>
 
 <div align="center">
 <h3>회원 등록</h3>
 <hr width="80%">
-<form action="join.do" method="post">
-<table border="1" width="500">
+<form action="/myapp/member/updateMember.do" method="post">
+<table border="1">
 	<tr>
 		<td align=center>아이디</td>
-		<td><input type="text" name="id"></td>
+		<td><input type="hidden" name="id" value="${member.id }">
+			${member.id }</td>
 	</tr>
 	<tr>
 		<td align=center>비밀번호</td>
@@ -21,32 +22,33 @@
 	</tr>
 	<tr>
 		<td align=center>이름</td>
-		<td><input type="text" name="name"></td>
+		<td><input type="text" name="name" value="${member.name }"></td>
 	</tr>
 	<tr>
 		<td align=center>전화번호</td>
-		<td><input type="text" name="phone"></td>
+		<td><input type="text" name="phone" value="${member.phone }"></td>
 	</tr>
 	<tr>
 		<td align=center>이메일</td>
-		<td><input type="text" name="email"></td>
+		<td><input type="text" name="email" value="${member.email }"></td>
 	</tr>
 	<tr>
 		<td align=center>주소</td>
 		<td>
-			<input type="text" id="sample4_postcode" placeholder="우편번호" name=post>
+			<input type="text" id="sample4_postcode" placeholder="우편번호" name=post value="${member.post }">
 			<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-			<input type="text" id="sample4_roadAddress" placeholder="도로명주소" size="60"  name=address1 ><br>
+			<input type="text" id="sample4_roadAddress" placeholder="도로명주소" size="60"  name=address1 value="${member.address1 }"><br>
 			<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소"  size="60">
 			<span id="guide" style="color:#999;display:none"></span>
-			<input type="text" id="sample4_detailAddress" placeholder="상세주소"  size="60"  name=address2><br>
+			<input type="text" id="sample4_detailAddress" placeholder="상세주소"  size="60"  name=address2 value="${member.address2 }"><br>
 			<input type="hidden" id="sample4_extraAddress" placeholder="참고항목"  size="60">
 			<input type="hidden" id="sample4_engAddress" placeholder="영문주소"  size="60" >										
 		</td>		
 	</tr>
 	<tr>
 		<td colspan="2" align="center">
-			<input type="submit" value="회원가입">
+			<input type="submit" value="회원 정보 수정">
+			<input type="button" value="회원 탈퇴" onclick="location.href='deleteMember.do?id=${member.id}'">
 		</td>
 	</tr>
 </table>
