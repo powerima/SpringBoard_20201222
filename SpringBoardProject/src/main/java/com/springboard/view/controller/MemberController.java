@@ -1,5 +1,6 @@
 package com.springboard.view.controller;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,7 +39,11 @@ public class MemberController {
 			return "redirect:login.do";
 		}
 		
+		String hashPwd = BCrypt.hashpw(vo.getPassword(), BCrypt.gensalt());
+		
+		vo.setPassword(hashPwd);		
 		ms.updateMember(vo);
+		
 		return "redirect:getMember.do";
 	}
 	

@@ -1,9 +1,19 @@
 /**
  * 
  */
+ 
+ 
+function checkPassword() {
+	if (joinForm.password.value != joinForm.password2.value) {
+		alert("같은 비밀번호를 입력해 주세요");
+		return false;
+	}
+}
+
+ 
+/* 
 $(document).ready(function(){
-	$(".commentList").load("getCommentList.do?ref=${board.ref}");
-	
+	$(".commentList").load("getCommentList.do?ref=${board.ref}");	
 	
 	$("#insertComment").click(function(){
 		var query = {
@@ -26,7 +36,7 @@ $(document).ready(function(){
 	
 	$("#deleteComment").click(function(){
 		alert("deleteComment");
-		/*
+		
 		var query = {
 			seq: $("seq").val()
 		};
@@ -40,8 +50,9 @@ $(document).ready(function(){
 				document.location.reload();
 			}
 		});
-		*/
-	});
-	
+		
+	});	
 	
 });
+
+*/

@@ -5,7 +5,8 @@
 <div align="center">
 <h3>회원 등록</h3>
 <hr width="80%">
-<form action="/myapp/system/join.do" method="post">
+<form name="joinForm" action="/myapp/system/join.do"
+	 method="post" onSubmit="return checkJoinForm();">
 <table border="1" width="500">
 	<tr>
 		<td align=center>아이디</td>
@@ -55,6 +56,24 @@
 </body>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
+	// 비밀번호 체크
+	function checkJoinForm() {
+		if(joinForm.id.value.length == 0) {
+			alert("아이디를 입력하세요.");
+			return false;
+		}
+		
+		if(joinForm.password.value == "") {
+			alert("비밀번호를 입력해주세요.");
+			return false;
+		}
+		
+		if(joinForm.password.value != joinForm.password2.value) {
+			alert("같은 비밀번호를 한번 더 입력해 주세요");
+			return false;
+		}
+	}
+	
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function sample4_execDaumPostcode() {
         new daum.Postcode({

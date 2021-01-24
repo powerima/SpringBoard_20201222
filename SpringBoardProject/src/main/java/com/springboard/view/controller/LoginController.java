@@ -1,5 +1,6 @@
 package com.springboard.view.controller;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +35,9 @@ public class LoginController {
 	// 회원 가입
 	@RequestMapping(value="/system/join.do", method=RequestMethod.POST)
 	public String join(MemberVo vo) {
+		String hashPwd = BCrypt.hashpw(vo.getPassword(), BCrypt.gensalt());
+		
+		vo.setPassword(hashPwd);
 		vo.setRole("ROLE_MEMBER");
 		ms.insertMember(vo);
 		return "forward:../index.jsp";
@@ -50,11 +54,15 @@ public class LoginController {
 	public String login(MemberVo vo, Model model) {
 		MemberVo findMember = ms.getMember(vo);
 		
-		if(findMember != null 
-				&& findMember.getPassword().equals(vo.getPassword())) {
-			model.addAttribute("member", findMember);
+		if(findMember != null) {
+			System.out.println(vo.getPassword());
+			System.out.println(findMember.getPassword());
 			
-			return "forward:../index.jsp";
+			if(BCrypt.checkpw(vo.getPassword(), findMember.getPassword())) {
+				model.addAttribute("member", findMember);
+				
+				return "forward:../index.jsp";
+			}
 		}
 		return "redirect:/system/login.do";
 	}
