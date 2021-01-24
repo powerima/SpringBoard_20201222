@@ -180,7 +180,7 @@ public class BoardController {
 	
 	// 글 삭제
 	@RequestMapping(value="deleteArticle.do")
-	public String deleteBoard(@ModelAttribute("member") MemberVo member,
+	public String deleteArticle(@ModelAttribute("member") MemberVo member,
 						BoardVo vo, HttpServletRequest request) {
 		// 로그인 여부 검사
 		if(member.getId() == null) {
@@ -210,16 +210,20 @@ public class BoardController {
 	// 댓글 삭제
 	@RequestMapping(value="deleteComment.do")
 	public String deleteComment(@ModelAttribute("member") MemberVo member, BoardVo vo) {
-		System.out.println("==============deleteComment==============");
 		if(member.getId() == null) {
 			return "redirect:/system/login.do";
 		}
 		
-		bs.discountCommenctcnt(vo);			// 댓글 수 감소
-		bs.deleteComment(vo);				// 글 삭제
+		vo = bs.getBoard(vo);
 		
+		// 권한 여부 검사
+		if(member.getRole().equals("ROLE_ADMIN") || member.getId().equals(vo.getMember_id())) {
+			bs.discountCommenctcnt(vo);			// 댓글 수 감소
+			bs.deleteComment(vo);				// 글 삭제
+			return "redirect:getArticleList.do";
+		}
 		
-		return "getArticleList.do";
+		return "../system/accessDenied.jsp";
 	}
 	
 	// 게시 글 상세 조회

@@ -29,7 +29,7 @@
 	<tr>
 		<td colspan="2" align="right">
 			[<a href="/myapp/board/getArticle.do?seq=${board.seq }">글 수정</a>]
-			[<a href="/myapp/board/deleteBoard.do?ref=${board.ref }">삭제</a>]
+			[<a href="/myapp/board/deleteArticle.do?seq=${board.seq }&ref=${board.ref }">삭제</a>]
 			[<a href="/myapp/board/getArticleList.do">목록</a>]</td>
 	</tr>
 </table>

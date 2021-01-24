@@ -55,9 +55,6 @@ public class LoginController {
 		MemberVo findMember = ms.getMember(vo);
 		
 		if(findMember != null) {
-			System.out.println(vo.getPassword());
-			System.out.println(findMember.getPassword());
-			
 			if(BCrypt.checkpw(vo.getPassword(), findMember.getPassword())) {
 				model.addAttribute("member", findMember);
 				

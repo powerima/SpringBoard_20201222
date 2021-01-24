@@ -5,7 +5,7 @@
 <div align="center">
 <h3>회원 목록</h3>
 <hr width="80%">
-<table border="1" width="600">
+<table border="1" width="700">
 	<tr align="center">
 		<td>아이디</td>
 		<td>비밀번호</td>
